@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 from rich.console import Console
 from rich.table import Table
 
-CONFIG_FILE = Path("/etc/podmanager/cli/config2")
+CONFIG_FILE = Path("/etc/podmanager/cli/config")
 
 
 console = Console()

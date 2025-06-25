@@ -16,12 +16,6 @@ def cli():
 
 
 @cli.command()
-def test():
-    """Test command to check if the CLI is working."""
-    click.secho("Gigapod CLI is working!", fg="green")
-
-
-@cli.command()
 @click.option("--url", prompt=True, help="API URL", default="https://gigapod.myelintek.com")
 @click.option("--account", prompt=True, help="Your account", default="admin")
 @click.option("--password", prompt=True, hide_input=True, help="Your password")
