@@ -2,14 +2,14 @@ from importlib.metadata import version
 
 import click
 import requests
+from jose import jwt
 
 from .services import infrastructure as infra_commands
 from .utils import Config
 
 
 @click.group()
-# @click.version_option(version=version("podmanager-cli"), message="Gigapod CLI Version %(version)s")
-@click.version_option(version="0.1.0-dev", message="Gigapod CLI Version %(version)s")
+@click.version_option(version=version("podmanager-cli"), message="Gigapod CLI Version %(version)s")
 def cli():
     """Main entry point for the CLI."""
     pass
@@ -30,12 +30,16 @@ def login(url, account, password):
             click.secho(f"Login failed: {http_err} -> {response.text}", fg="red")
             return
 
-        token = response.json().get("access_token")
+        data = response.json()
+        token = data.get("access_token")
         if not token:
             click.secho("Login failed: No access token received.", fg="red")
             return
 
-        Config.save(target_server=url, access_token=token)
+        # Decode the JWT to get the expiration time
+        decoded_token = jwt.decode(token, key=None, options={"verify_signature": False})
+        expire_at = str(decoded_token.get("exp"))
+        Config.save(target_server=url, access_token=token, expire_at=expire_at)
 
         click.secho("Login successful.", fg="green")
     except requests.exceptions.RequestException as e:
