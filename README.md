@@ -2,6 +2,13 @@
 
 A CLI tool for managing podmanager with APIs. This tool provides a convenient way to interact with podmanager services.
 
+## Testing Environment
+
+This CLI tool has been tested on the following environment:
+
+- **Operating System**: Ubuntu 24.04
+- **Python Version**: 3.12.3
+
 ## Installation
 
 To install the Podmanager CLI, run the following commands:
