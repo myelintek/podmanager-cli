@@ -28,7 +28,7 @@ def list(format, filter, columns, sort_key, sort_order) -> None:
 
     node_res = api_request(
         method="get",
-        endpoint="/api/gsm/gsm/common/getNodeList?type=BMC",
+        endpoint="/api/v1/infra/common/getNodeList?type=BMC",
     )
 
     try:
