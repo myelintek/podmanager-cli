@@ -90,3 +90,41 @@ The `provision osimg-list` command retrieves a list of os image from the provisi
 │ 38 │ ubuntu │ noble   │ ubuntu/noble │ amd64        │ 365732414 │ None                    │
 └────┴────────┴─────────┴──────────────┴──────────────┴───────────┴─────────────────────────┘
 ```
+
+### Example Command: `provision osimg-upload`
+
+The `provision osimg-upload` command can upload os image to provision service. You can apply format the output using various options.
+
+#### Command Options:
+
+- `--format`: Specify the output format (`raw`, `json`, `csv`, or `table`).
+- `--osimage`: OS image file  [required]
+- `--title`: Title for the os image.  [required]
+- `--name`: Name of the os image.  [required]
+- `--architecture`: Architecture the os image supports.  [required]
+
+#### Example:
+
+```shell
+(podmanager) root@LAPTOP-8KSBN9VT:~/# podmanager-cli provision osimg-upload --name='rhel/8-custom' --title='RHEL 8 Custom' --architecture='amd64/generic' --osimage='rhel8.tar.gz' --format table
+                          cli.services.provision.osimg_upload Output
+┏━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ id ┃ os     ┃ release       ┃ name          ┃ architecture ┃ size      ┃ last_deployed           ┃
+┡━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 43 │ RHEL   │ RHEL 8 Custom │ rhel/8-custom │ amd64        │ 986479907 │ 2025-07-15T05:06:01.635 │
+└────┴────────┴───────────────┴───────────────┴──────────────┴───────────┴─────────────────────────┘
+```
+
+### Example Command: `provision osimg-delete`
+
+The `provision osimg-upload` command can delete os image from provision service.
+
+#### Command Options:
+- `--id`: OS image ID
+
+#### Example:
+
+```shell
+(podmanager) root@LAPTOP-8KSBN9VT:~/# podmanager-cli provision osimg-delete --id 43
+Delete OS image 43 success
+```
