@@ -42,7 +42,7 @@ def list(format, filter, columns, sort_key, sort_order) -> None:
 
     firmware_res = api_request(
         method="post",
-        endpoint="/api/gsm/bmc/getFirmwareVersion",
+        endpoint="/api/v1/infra/getFirmwareVersion",
         json=[node["BMC IPv4"] for node in nodes if "BMC IPv4" in node],
         headers={
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ def list(format, filter, columns, sort_key, sort_order) -> None:
 
     fru_res = api_request(
         method="post",
-        endpoint="/api/gsm/bmc/getFru",
+        endpoint="/api/v1/infra/getFru",
         json=[node["BMC IPv4"] for node in nodes if "BMC IPv4" in node],
         headers={
             "Content-Type": "application/json",
