@@ -43,15 +43,15 @@ def osimg_list(format, filter, columns, sort_key, sort_order) -> None:
 
 @provision.command()
 @click.option(
-    "--boot-resource-id",
+    "--id",
     help="OS image ID",
 )
-def osimg_delete(boot_resource_id: str) -> None:
+def osimg_delete(id: str) -> None:
     # Delete image
 
     image_res = api_request(
         method="delete",
-        endpoint=f"/api/v1/provision/osimg/{boot_resource_id}"
+        endpoint=f"/api/v1/provision/osimg/{id}"
     )
 
     try:
@@ -62,7 +62,7 @@ def osimg_delete(boot_resource_id: str) -> None:
         return
 
     image_json = image_res.json()
-    print(f"Delete OS image {boot_resource_id} success")
+    print(f"Delete OS image {id} success")
 
 
 @provision.command()
