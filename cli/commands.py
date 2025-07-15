@@ -5,6 +5,7 @@ import requests
 from jose import jwt
 
 from .services import infrastructure as infra_commands
+from .services import provision as provision_commands
 from .utils import Config
 
 
@@ -57,6 +58,7 @@ def logout():
 
 
 cli.add_command(infra_commands.infra)
+cli.add_command(provision_commands.provision)
 
 if __name__ == "__main__":
     cli()

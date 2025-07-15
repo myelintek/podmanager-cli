@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 from rich.console import Console
 from datetime import datetime
 
-CONFIG_FILE = Path("/etc/podmanager/cli/config")
+CONFIG_FILE = Path("~/.podmanagercli/.config")
 
 
 console = Console()
