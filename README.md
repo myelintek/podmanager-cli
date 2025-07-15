@@ -117,7 +117,7 @@ The `provision osimg-upload` command can upload os image to provision service. Y
 
 ### Example Command: `provision osimg-delete`
 
-The `provision osimg-upload` command can delete os image from provision service.
+The `provision osimg-delete` command can delete os image from provision service.
 
 #### Command Options:
 - `--id`: OS image ID
