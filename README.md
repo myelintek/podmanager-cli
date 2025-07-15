@@ -40,9 +40,9 @@ Password:
 Login successful.
 ```
 
-### Example Command: `list`
+### Example Command: `infra list`
 
-The `list` command retrieves a list of resources from the infrastructure service. You can apply filters, sort the data, and format the output using various options.
+The `infra list` command retrieves a list of resources from the infrastructure service. You can apply filters, sort the data, and format the output using various options.
 
 #### Command Options:
 
@@ -55,11 +55,6 @@ The `list` command retrieves a list of resources from the infrastructure service
 #### Example:
 
 ```shell
-(podmanager) root@LAPTOP-8KSBN9VT:~/# podmanager-cli login
-Url [https://gigapod.myelintek.com]:
-Account [admin]:
-Password:
-Login successful.
 (podmanager) root@LAPTOP-8KSBN9VT:~/# podmanager-cli infra list --format table --sort-key "BMC IPv4" --sort-order desc
                                                      cli.services.infrastructure.list Output
 ┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
@@ -69,4 +64,67 @@ Login successful.
 │ AMI10FFE074D4AE │ 10:FF:E0:74:D4:AE │ R163-Z35-AAH1-000         │ Off          │ Warning │ 100.74.5.202 │ 13.06.15           │ R17_F34        │
 │ AMI10FFE074D45D │ 10:FF:E0:74:D4:5D │ R163-Z35-AAH1-000         │ Off          │ Health  │ 100.74.5.201 │ 13.06.14           │ R17_F34        │
 └─────────────────┴───────────────────┴───────────────────────────┴──────────────┴─────────┴──────────────┴────────────────────┴────────────────┘
+```
+
+### Example Command: `provision osimg-list`
+
+The `provision osimg-list` command retrieves a list of os image from the provision service. You can apply filters, sort the data, and format the output using various options.
+
+#### Command Options:
+
+- `--filter`: Apply filters to the data (e.g., `--filter "size>200"`).
+- `--sort-key`: Specify the key to sort by (e.g., `--sort-key "name").
+- `--sort-order`: Specify the sort order (`asc` or `desc`).
+- `--columns`: Specify the columns to display (e.g., `--columns "os,name").
+- `--format`: Specify the output format (`raw`, `json`, `csv`, or `table`).
+
+#### Example:
+
+```shell
+(podmanager) root@LAPTOP-8KSBN9VT:~/# podmanager-cli provision osimg-list --format table
+                          cli.services.provision.osimg_list Output
+┏━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ id ┃ os     ┃ release ┃ name         ┃ architecture ┃ size      ┃ last_deployed           ┃
+┡━━━━╇━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 32 │ ubuntu │ jammy   │ ubuntu/jammy │ amd64        │ 651220699 │ 2025-06-27T10:30:47.883 │
+│ 38 │ ubuntu │ noble   │ ubuntu/noble │ amd64        │ 365732414 │ None                    │
+└────┴────────┴─────────┴──────────────┴──────────────┴───────────┴─────────────────────────┘
+```
+
+### Example Command: `provision osimg-upload`
+
+The `provision osimg-upload` command can upload os image to provision service. You can apply format the output using various options.
+
+#### Command Options:
+
+- `--format`: Specify the output format (`raw`, `json`, `csv`, or `table`).
+- `--osimage`: OS image file  [required]
+- `--title`: Title for the os image.  [required]
+- `--name`: Name of the os image.  [required]
+- `--architecture`: Architecture the os image supports.  [required]
+
+#### Example:
+
+```shell
+(podmanager) root@LAPTOP-8KSBN9VT:~/# podmanager-cli provision osimg-upload --name='rhel/8-custom' --title='RHEL 8 Custom' --architecture='amd64/generic' --osimage='rhel8.tar.gz' --format table
+                          cli.services.provision.osimg_upload Output
+┏━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ id ┃ os     ┃ release       ┃ name          ┃ architecture ┃ size      ┃ last_deployed           ┃
+┡━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 43 │ RHEL   │ RHEL 8 Custom │ rhel/8-custom │ amd64        │ 986479907 │ 2025-07-15T05:06:01.635 │
+└────┴────────┴───────────────┴───────────────┴──────────────┴───────────┴─────────────────────────┘
+```
+
+### Example Command: `provision osimg-delete`
+
+The `provision osimg-upload` command can delete os image from provision service.
+
+#### Command Options:
+- `--id`: OS image ID
+
+#### Example:
+
+```shell
+(podmanager) root@LAPTOP-8KSBN9VT:~/# podmanager-cli provision osimg-delete --id 43
+Delete OS image 43 success
 ```
